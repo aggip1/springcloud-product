@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ag.dao.ProductDao">
+
+    <select id="queryProduct" resultType="ProductDto" parameterType="java.lang.Integer">
+select i.product_id as id , i.prodcut_name as name,  i.product_description as description , i.product_price as price, i.product_icon as icon from product_info i LEFT JOIN product_category c on i.category_type=c.category_type where i.category_type=#{id}
+    </select>
+    <select id="queryByIdProduct" resultType="ProductInfo">
+        select  prodcut_name as prodcutname,product_icon as producticon,product_price as productprice from product_info where product_id=#{id}
+    </select>
+
+    <update id="updateStock">
+        update product_info set product_stock=product_stock-#{quantity} where product_id=#{id}
+    </update>
+
+</mapper>
